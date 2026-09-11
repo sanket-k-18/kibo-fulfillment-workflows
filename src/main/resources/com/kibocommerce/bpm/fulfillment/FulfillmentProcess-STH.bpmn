@@ -248,7 +248,17 @@
         </drools:metaData>
       </bpmn2:extensionElements>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_43A98BC3-88BA-44CB-914D-9D48378A61B9" sourceRef="_CD6E204D-FD75-4682-ACC1-07ED50B92257" targetRef="_6435A331-0795-4719-989B-F9FB69570FC5">
+    <bpmn2:sequenceFlow id="_43A98BC3-88BA-44CB-914D-9D48378A61B9" sourceRef="_CD6E204D-FD75-4682-ACC1-07ED50B92257" targetRef="_CUSTOM_FLOW_MARKER">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_CUSTOM_FLOW_TO_PREPARE" sourceRef="_CUSTOM_FLOW_MARKER" targetRef="_6435A331-0795-4719-989B-F9FB69570FC5">
       <bpmn2:extensionElements>
         <drools:metaData name="isAutoConnection.source">
           <drools:metaValue><![CDATA[true]]></drools:metaValue>
@@ -610,11 +620,22 @@ System.out.println("PRINTED_PACKING_SLIP");
 kcontext.setVariable("currentState", "ACCEPTED_SHIPMENT");
 System.out.println(kcontext.getVariable("currentState"));]]></bpmn2:script>
     </bpmn2:scriptTask>
-    <bpmn2:userTask id="_6435A331-0795-4719-989B-F9FB69570FC5" name="Prepare for Shipment">
+    <bpmn2:scriptTask id="_CUSTOM_FLOW_MARKER" name="Custom Flow Marker" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Custom Flow Marker]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_43A98BC3-88BA-44CB-914D-9D48378A61B9</bpmn2:incoming>
+      <bpmn2:outgoing>_CUSTOM_FLOW_TO_PREPARE</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[kcontext.setVariable("currentState", "CUSTOM_FLOW_ACTIVE");
+System.out.println("Custom flow marker reached: STH fulfillment is using the custom workflow.");]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:userTask id="_6435A331-0795-4719-989B-F9FB69570FC5" name="Prepare for Shipment something else">
       <bpmn2:documentation id="_7R0cGwrPEe6wb-qS0k3PhQ"><![CDATA[Prepare for Shipment User Task]]></bpmn2:documentation>
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Prepare for Shipment]]></drools:metaValue>
+          <drools:metaValue><![CDATA[Prepare for Shipment something else]]></drools:metaValue>
         </drools:metaData>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
           <drools:script><![CDATA[if (Boolean.TRUE.equals(back)) {
@@ -628,7 +649,7 @@ kcontext.getKieRuntime().signalEvent("back", null, kcontext.getProcessInstance()
 }]]></drools:script>
         </drools:onExit-script>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>_43A98BC3-88BA-44CB-914D-9D48378A61B9</bpmn2:incoming>
+      <bpmn2:incoming>_CUSTOM_FLOW_TO_PREPARE</bpmn2:incoming>
       <bpmn2:outgoing>_CD4006CA-416F-4753-9FC1-EF97EC94AEC8</bpmn2:outgoing>
       <bpmn2:ioSpecification id="_7R0cHArPEe6wb-qS0k3PhQ">
         <bpmn2:dataInput id="_6435A331-0795-4719-989B-F9FB69570FC5_TaskNameInputX" drools:dtype="Object" itemSubjectRef="__6435A331-0795-4719-989B-F9FB69570FC5_TaskNameInputXItem" name="TaskName"/>

@@ -677,11 +677,11 @@ System.out.println("PRINTED_PACKING_SLIP");
 kcontext.setVariable("currentState", "ACCEPTED_SHIPMENT");
 System.out.println(kcontext.getVariable("currentState"));]]></bpmn2:script>
     </bpmn2:scriptTask>
-    <bpmn2:userTask id="_6435A331-0795-4719-989B-F9FB69570FC5" name="Prepare for Shipment">
-      <bpmn2:documentation id="_aTwEDpeYEfGUq-4sPUuaMQ"><![CDATA[Prepare for Shipment User Task]]></bpmn2:documentation>
+    <bpmn2:userTask id="_6435A331-0795-4719-989B-F9FB69570FC5" name="Prepare for Shipment custom value">
+      <bpmn2:documentation id="_aTwEDpeYEfGUq-4sPUuaMQ"><![CDATA[Prepare for Shipment custom value User Task]]></bpmn2:documentation>
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Prepare for Shipment]]></drools:metaValue>
+          <drools:metaValue><![CDATA[Prepare for Shipment custom value]]></drools:metaValue>
         </drools:metaData>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
           <drools:script><![CDATA[if (Boolean.TRUE.equals(back)) {
