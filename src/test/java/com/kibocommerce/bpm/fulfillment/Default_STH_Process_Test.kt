@@ -107,7 +107,7 @@ class Default_STH_Process_Test : JbpmJUnitBaseTestCase(true, false) {
         validateStock(wpi, "IN_STOCK", false)
         printPackingSlip(wpi, null)
 
-        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment")
+        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment custom value")
         assertCurrentState(wpi, "PRINTED_PACKING_SLIP")
     }
 
@@ -153,7 +153,7 @@ class Default_STH_Process_Test : JbpmJUnitBaseTestCase(true, false) {
     fun pick() {
         val wpi = createProcess()
         wpi.signalEvent("picked", null)
-        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment")
+        assertNodeActive(wpi.id, kieSession, "Prepare for Shipment custom value")
         assertCurrentState(wpi, "PRINTED_PACKING_SLIP")
     }
 
@@ -211,7 +211,7 @@ class Default_STH_Process_Test : JbpmJUnitBaseTestCase(true, false) {
             "Accept Shipment",
             "Validate Items In Stock",
             "Print Packing Slip",
-            "Prepare for Shipment"
+            "Prepare for Shipment custom value"
         )
         assertNodeTriggered(processInstance.id, "Pre-Accept Shipment", "Accept Shipment")
         assertEquals("PRE_ACCEPT_SHIPMENT", processInstance.getVariable("currentState"))
@@ -287,7 +287,7 @@ class Default_STH_Process_Test : JbpmJUnitBaseTestCase(true, false) {
     }
 
     private fun prepareForShipment(wpi: WorkflowProcessInstance, back: Boolean?) {
-        val expectedTaskName = "Prepare for Shipment"
+        val expectedTaskName = "Prepare for Shipment custom value"
 
         assertProcessInstanceActive(wpi.id, kieSession)
         assertNodeActive(wpi.id, kieSession, expectedTaskName)
